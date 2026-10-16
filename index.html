@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="GapCraft Plus turns the time between classes into a weather-aware mini-plan."
+    />
+    <meta name="theme-color" content="#4a63f3" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="GapCraft Plus" />
+    <title>GapCraft Plus — Weather-aware mini-plans</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./icon-192.png" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="GapCraft home">
+          <span class="brand-mark" aria-hidden="true">G</span>
+          <span>GapCraft <small>PLUS</small></span>
+        </a>
+        <div class="streak-chip" aria-live="polite">
+          <span aria-hidden="true">✦</span>
+          <span><strong id="streakCount">0</strong> gaps crafted</span>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">A tiny planner for campus in-between time</p>
+            <h1 id="hero-title">Make the gap<br /><em>work for you.</em></h1>
+            <p class="hero-intro">
+              Tell us your time, energy, and local weather. GapCraft gives you a doable mini-plan—with breathing room built in.
+            </p>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="clock-card">
+              <span class="clock-label">NEXT CLASS</span>
+              <strong>2:30</strong>
+              <span class="clock-foot">plenty of time</span>
+            </div>
+            <span class="spark spark-one">✦</span>
+            <span class="spark spark-two">✦</span>
+          </div>
+        </section>
+
+        <section class="weather-panel" aria-labelledby="weather-title">
+          <div class="weather-copy">
+            <div class="section-heading compact">
+              <span class="step-number">01</span>
+              <div>
+                <p class="eyebrow">Read the moment</p>
+                <h2 id="weather-title">Should your gap go outside?</h2>
+              </div>
+            </div>
+            <p>Look up your campus city. If you choose a reset plan, GapCraft will suggest an indoor or outdoor break based on current conditions.</p>
+            <form class="weather-form" id="weatherForm">
+              <label for="cityInput">Campus city</label>
+              <div class="weather-search">
+                <input id="cityInput" name="city" type="search" placeholder="Try Boston, MA" autocomplete="address-level2" required />
+                <button type="submit">Check weather</button>
+              </div>
+              <p class="weather-status" id="weatherStatus" role="status">Optional—the planner still works offline without it.</p>
+            </form>
+          </div>
+
+          <div class="weather-card is-empty" id="weatherCard" aria-live="polite">
+            <span class="weather-icon" id="weatherIcon" aria-hidden="true">◌</span>
+            <div>
+              <p class="weather-location" id="weatherLocation">Weather not checked</p>
+              <p class="weather-reading"><strong id="weatherTemp">--°</strong> <span id="weatherDescription">Add a city to personalize your reset.</span></p>
+            </div>
+            <div class="weather-details">
+              <span>Feels <strong id="weatherFeels">--°</strong></span>
+              <span>Wind <strong id="weatherWind">-- mph</strong></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="planner" aria-labelledby="planner-title">
+          <div class="section-heading">
+            <span class="step-number">02</span>
+            <div>
+              <p class="eyebrow">Build your gap</p>
+              <h2 id="planner-title">What are you working with?</h2>
+            </div>
+          </div>
+
+          <form id="gapForm">
+            <fieldset class="choice-group">
+              <legend>How much time do you have?</legend>
+              <div class="segmented four-up" role="radiogroup">
+                <label><input type="radio" name="minutes" value="15" /><span>15 min</span></label>
+                <label><input type="radio" name="minutes" value="30" checked /><span>30 min</span></label>
+                <label><input type="radio" name="minutes" value="45" /><span>45 min</span></label>
+                <label><input type="radio" name="minutes" value="60" /><span>60 min</span></label>
+              </div>
+            </fieldset>
+
+            <div class="form-grid">
+              <fieldset class="choice-group">
+                <legend>How’s your energy?</legend>
+                <div class="segmented" role="radiogroup">
+                  <label><input type="radio" name="energy" value="low" /><span>Low</span></label>
+                  <label><input type="radio" name="energy" value="steady" checked /><span>Steady</span></label>
+                  <label><input type="radio" name="energy" value="high" /><span>High</span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="choice-group">
+                <legend>What do you need most?</legend>
+                <div class="segmented" role="radiogroup">
+                  <label><input type="radio" name="goal" value="reset" /><span>Reset</span></label>
+                  <label><input type="radio" name="goal" value="study" checked /><span>Study</span></label>
+                  <label><input type="radio" name="goal" value="admin" /><span>Life admin</span></label>
+                </div>
+              </fieldset>
+            </div>
+
+            <button class="primary-button" type="submit">
+              Craft my gap
+              <span aria-hidden="true">↗</span>
+            </button>
+          </form>
+        </section>
+
+        <section class="plan-section" id="planSection" aria-labelledby="plan-title">
+          <div class="section-heading inverse">
+            <span class="step-number">03</span>
+            <div>
+              <p class="eyebrow">Your mini-plan</p>
+              <h2 id="plan-title">A calm 30-minute study gap</h2>
+              <p class="plan-context" id="planContext">Built for the time and energy you have right now.</p>
+            </div>
+          </div>
+
+          <div class="plan-layout">
+            <div>
+              <ol class="task-list" id="taskList"></ol>
+              <p class="buffer-note"><span aria-hidden="true">◌</span> We always save 2 minutes to pack up and get moving.</p>
+            </div>
+
+            <aside class="timer-card" aria-label="Gap timer">
+              <p class="timer-kicker">YOUR GAP TIMER</p>
+              <div class="timer-display" id="timerDisplay" aria-live="polite">30:00</div>
+              <div class="timer-progress" aria-hidden="true"><span id="timerBar"></span></div>
+              <button class="timer-button" id="timerButton" type="button">Start timer</button>
+              <button class="text-button" id="resetButton" type="button">Reset</button>
+            </aside>
+          </div>
+
+          <div class="completion-row">
+            <p>Finished your plan? Bank the win.</p>
+            <button class="complete-button" id="completeButton" type="button">
+              <span aria-hidden="true">✓</span> Mark this gap complete
+            </button>
+          </div>
+        </section>
+
+        <section class="how-it-works" aria-labelledby="how-title">
+          <div class="section-heading compact">
+            <span class="step-number">04</span>
+            <div>
+              <p class="eyebrow">No productivity guilt</p>
+              <h2 id="how-title">Small plans beat vague intentions.</h2>
+            </div>
+          </div>
+          <div class="principles">
+            <article>
+              <span>01</span>
+              <h3>Fits the moment</h3>
+              <p>Your plan changes with the minutes and energy you actually have.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>One clear sequence</h3>
+              <p>No giant to-do list—just a few steps you can finish before class.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Progress stays yours</h3>
+              <p>Your completed-gap count is saved only in this browser.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="history-section" id="historySection" aria-labelledby="history-title">
+          <div class="history-heading">
+            <div class="section-heading compact">
+              <span class="step-number">05</span>
+              <div>
+                <p class="eyebrow">Your recent wins</p>
+                <h2 id="history-title">Plans you actually finished.</h2>
+              </div>
+            </div>
+            <button class="history-clear" id="clearHistory" type="button">Clear history</button>
+          </div>
+          <div class="history-list" id="historyList"></div>
+          <p class="history-empty" id="historyEmpty">Complete your first gap and it will show up here.</p>
+        </section>
+      </main>
+
+      <footer>
+        <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">G</span><span>GapCraft Plus</span></a>
+        <p>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>.</p>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js").catch((error) => {
+            console.error("GapCraft could not enable offline mode:", error);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

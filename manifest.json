@@ -1,0 +1,24 @@
+{
+  "name": "GapCraft Plus — Weather-Aware Mini-Plans",
+  "short_name": "GapCraft+",
+  "description": "Turn short gaps between classes into realistic plans that adapt to your energy and local weather.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f1e8",
+  "theme_color": "#4a63f3",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
